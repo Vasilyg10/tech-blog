@@ -1,0 +1,25 @@
+<section>
+    <h2>Make a New Post!</h2>
+
+    <form class="new-post-form">
+        <div>
+            <label for="post-title">Blog Title</label>
+            <input type="text" id="post-title" name="post-title" />
+        </div>
+        <button type="submit" class="btn">Create the Post!</button>
+    </form>
+</section>
+{{#if posts.length}}
+<section>
+    <h2>Posts you have made!</h2>
+    <ol>
+        {{#each posts as |post|}}
+        <li>
+            {{> post-info post}}
+            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit the Post You Made!</a>
+        </li>
+        {{/each}}
+    </ol>
+</section>
+{{/if}}
+<script src="/javascript/add-post.js"></script>
