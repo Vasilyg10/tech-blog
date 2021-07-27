@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
-const sequelize = require('../../config/connection');
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -90,8 +89,10 @@ router.post('/login', (req, res) => {
                 return;
             }
 
-            const validPass = dbUserData.checkPassword(req.body.password);
-            if (!validPass) {
+            res.json({ user: dbUserData });
+
+            const validPassword = dbUserData.checkPassword(req.body.password);
+            if (!validPassword) {
                 res.status(400).json({ message: 'Incorrect password' });
                 return;
             }
